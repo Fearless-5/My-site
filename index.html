@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+</head>
+<body>
+	<div id="bu" ></div>
+	<select id="opt" >
+	<option></option>
+	<option value="con" >Contact</option>
+	<option value="not" >Notification</option>
+	<option value="bal" >Balance</option>
+	</select>
+	<input id="ty" ><br>
+	<input id="typ" ><br>
+	<button onclick="sd()">Send</button>
+</body>
+</html>
+<script type="text/javascript">
+window.onload = () => {
+	
+}
+function sd(){
+	if(opt.value == "con"){
+		var templ = `
+		<div class="agent" >
+		<div class="name" >Agents</div>
+		<span class="o">
+		${typ.value}
+		</span>
+		</div>`;
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "/Accounts/"+ty.value+"/main.php?mess="+templ, true);
+		xhr.send();
+		xhr.onload = function(){
+		if(this.status == 200){
+		alert("Success");
+		}
+		}
+	} else if(opt.value == "not"){
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "/Accounts/"+ty.value+"/main.php?not="+typ.value, true);
+		xhr.send();
+		xhr.onload = function(){
+			if(this.status == 200){
+				alert("Success");
+			}
+		}
+	} else if(opt.value == "bal"){
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "/Accounts/"+ty.value+"/main.php?bal="+typ.value, true);
+		xhr.send();
+		xhr.onload = function(){
+		if(this.status == 200){
+		alert("Success");
+		}
+		}
+	}
+}
+</script>
